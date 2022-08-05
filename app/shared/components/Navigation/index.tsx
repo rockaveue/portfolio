@@ -9,10 +9,11 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Link } from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 
 const NavigationHeader = () => {
   const isDesktop = useBreakpointValue({ base: false, lg: true })
+  const location = useLocation()
   return (
     <Box as="section" pb={{ base: '12', md: '24' }}>
       <Box
@@ -28,9 +29,14 @@ const NavigationHeader = () => {
                   <Link to="/">
                     <Button variant="primary">Home</Button>
                   </Link>
-                  <Link to="series">
-                    <Button variant="ghost">Series</Button>
+                  <Link to="tl">
+                    <Button variant="ghost">Translations</Button>
                   </Link>
+                  {location.pathname.includes('tl') && (
+                    <Link to="tl/series">
+                      <Button variant="ghost">Series</Button>
+                    </Link>
+                  )}
                 </ButtonGroup>
               </Flex>
             ) : (
