@@ -1,0 +1,13 @@
+{
+  "extends": ["@remix-run/eslint-config"],
+  "env": { "node": true },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "no-multi-spaces": "error"
+  }
+}

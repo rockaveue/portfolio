@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Links,
-  LinksFunction,
   LiveReload,
   Meta,
   Outlet,
@@ -9,7 +8,7 @@ import {
   ScrollRestoration,
   useCatch,
 } from 'remix'
-import type { MetaFunction } from 'remix'
+import type { MetaFunction, LinksFunction } from 'remix'
 import { VStack, Heading, ChakraProvider, Text } from '@chakra-ui/react'
 import { withEmotionCache } from '@emotion/react'
 
@@ -49,9 +48,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <Heading>There was an error</Heading>
         <Text>{error.message}</Text>
         <hr />
-        <Text>
-          FIX ME PLEASE
-        </Text>
+        <Text>FIX ME PLEASE</Text>
       </VStack>
     </Document>
   )
@@ -114,7 +111,7 @@ const Document = withEmotionCache(
       })
       // reset cache to reapply global styles
       clientStyleData?.reset()
-    })
+    }, [])
 
     return (
       <html lang="en">
@@ -137,5 +134,5 @@ const Document = withEmotionCache(
         </body>
       </html>
     )
-  },
+  }
 )
