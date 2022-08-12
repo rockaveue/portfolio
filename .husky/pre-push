@@ -5,4 +5,4 @@ if [ -t 1 ]; then
   exec < /dev/tty
 fi
 
-npm run type-check
+yarn type-check
