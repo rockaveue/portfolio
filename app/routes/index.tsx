@@ -1,5 +1,5 @@
-import { Box, Heading, HStack, Link as ChakraLink } from '@chakra-ui/react';
-import { Link } from 'remix';
+import { Box, Heading, HStack, Link as ChakraLink } from '@chakra-ui/react'
+import { Link } from '@remix-run/react'
 
 export default function Index() {
   return (
@@ -27,5 +27,5 @@ export default function Index() {
         </ChakraLink>
       </HStack>
     </Box>
-  );
+  )
 }

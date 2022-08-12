@@ -1,4 +1,5 @@
 import React from 'react'
+import type { LinksFunction, MetaFunction } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -7,8 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-} from 'remix'
-import type { MetaFunction, LinksFunction } from 'remix'
+} from '@remix-run/react'
 import { VStack, Heading, ChakraProvider, Text } from '@chakra-ui/react'
 import { withEmotionCache } from '@emotion/react'
 
