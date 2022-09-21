@@ -1,6 +1,6 @@
 import { Box, Image, Text } from '@chakra-ui/react'
 import React, { useRef } from 'react'
-import { useParallax, Parallax } from 'react-scroll-parallax'
+import { useParallax /*, Parallax */ } from 'react-scroll-parallax'
 
 const PortfolioContainer = () => {
   const target = useRef(null)
