@@ -11,7 +11,7 @@ import {
 } from '@remix-run/react'
 import { VStack, Heading, ChakraProvider, Text } from '@chakra-ui/react'
 import { withEmotionCache } from '@emotion/react'
-
+import { ParallaxProvider } from 'react-scroll-parallax'
 import { ServerStyleContext, ClientStyleContext } from './context'
 
 export const links: LinksFunction = () => {
@@ -34,7 +34,9 @@ export default function App() {
   return (
     <Document>
       <ChakraProvider>
-        <Outlet />
+        <ParallaxProvider>
+          <Outlet />
+        </ParallaxProvider>
       </ChakraProvider>
     </Document>
   )
