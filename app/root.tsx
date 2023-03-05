@@ -1,4 +1,4 @@
-import { ChakraProvider, Container, extendTheme } from '@chakra-ui/react'
+import { ChakraProvider, Container, ThemeConfig, extendTheme } from '@chakra-ui/react'
 import { withEmotionCache } from '@emotion/react'
 import type { MetaFunction } from '@remix-run/node'
 import {
@@ -8,6 +8,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from '@remix-run/react'
 import { useContext, useEffect } from 'react'
 import globalStyleURL from '~/styles/global.css'
@@ -20,7 +21,7 @@ export const links = () => {
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
-  title: 'site made by duk',
+  title: 'Dulguun Tuguldur - Homepage',
   viewport: 'width=device-width,initial-scale=1',
 })
 
@@ -31,7 +32,7 @@ const colors = {
 }
 
 const config = { initialColorMode: 'dark', useSystemColorMode: false }
-const theme = extendTheme(config)
+const theme: ThemeConfig = extendTheme({config})
 
 export default function App() {
   return (
@@ -88,9 +89,11 @@ export const Document = ({ children, title }: DocumentProps) => {
 }
 
 export function Layout({ children }: any) {
+  const params = useLocation()
+  const path = params['pathname']
   return (
     <>
-      <NavigationHeader />
+      <NavigationHeader path={path} />
       {children}
     </>
   )
