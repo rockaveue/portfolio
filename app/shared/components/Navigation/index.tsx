@@ -8,15 +8,16 @@ import {
   IconButton,
   useBreakpointValue,
   useColorModeValue,
-  Link,
   Heading,
   useColorMode,
-  Icon,
+  Menu,
+  MenuButton,
+  MenuList,
 } from '@chakra-ui/react'
 import { NavLink, useLocation } from '@remix-run/react'
 import Logo from '../Logo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 
 const LinkItem = ({ href, path, children }: any) => {
   const active = path === href
@@ -60,8 +61,8 @@ const NavigationHeader: React.FC<HeaderProps> = (props) => {
             <Heading as="h1" size="lg" letterSpacing={'tighter'}>
               <Logo />
             </Heading>
-            <>
-              <Button onClick={toggleColorMode}>
+            <Flex>
+              <Button onClick={toggleColorMode} variant="outline">
                 {colorMode == 'light' ? (
                   <FontAwesomeIcon icon={faMoon} />
                 ) : (
@@ -89,14 +90,32 @@ const NavigationHeader: React.FC<HeaderProps> = (props) => {
                 </Flex>
               ) : (
                 <Flex justifyContent="space-between">
-                  <IconButton
+                  <Box ml={2} display={{ base: 'inline-block' }}>
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        icon={<FontAwesomeIcon icon={faBars} />}
+                        variant="outline"
+                        aria-label="Options"
+                      />
+                      <MenuList>
+                        <LinkItem href="/works" path={path}>
+                          <Button variant="primary">Works</Button>
+                        </LinkItem>
+                        <LinkItem href="/posts" path={path}>
+                          <Button variant="primary">Posts</Button>
+                        </LinkItem>
+                      </MenuList>
+                    </Menu>
+                  </Box>
+                  {/* <IconButton
                     variant="ghost"
                     icon={<Box>hamburger</Box>}
                     aria-label="Open Menu"
-                  />
+                  /> */}
                 </Flex>
               )}
-            </>
+            </Flex>
           </HStack>
         </Container>
       </Box>

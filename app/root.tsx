@@ -1,4 +1,4 @@
-import { ChakraProvider, Container, ThemeConfig, extendTheme } from '@chakra-ui/react'
+import { ChakraProvider, Container } from '@chakra-ui/react'
 import { withEmotionCache } from '@emotion/react'
 import type { MetaFunction } from '@remix-run/node'
 import {
@@ -10,13 +10,20 @@ import {
   ScrollRestoration,
   useLocation,
 } from '@remix-run/react'
+import NavigationHeader from '@src/components/Navigation'
+import Theme from '@src/theme'
 import { useContext, useEffect } from 'react'
 import globalStyleURL from '~/styles/global.css'
 import { ClientStyleContext /* , ServerStyleContext */ } from './context'
-import NavigationHeader from './shared/components/Navigation'
 
 export const links = () => {
-  return [{ rel: 'stylesheet', href: globalStyleURL }]
+  return [
+    { rel: 'stylesheet', href: globalStyleURL },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;700&display=swap',
+    },
+  ]
 }
 
 export const meta: MetaFunction = () => ({
@@ -25,16 +32,8 @@ export const meta: MetaFunction = () => ({
   viewport: 'width=device-width,initial-scale=1',
 })
 
-const colors = {
-  brand: {
-    100: '#121212',
-  },
-}
-
-const config = { initialColorMode: 'dark', useSystemColorMode: false }
-const theme: ThemeConfig = extendTheme({config})
-
 export default function App() {
+  const { theme } = Theme()
   return (
     <Document>
       <ChakraProvider theme={theme}>
