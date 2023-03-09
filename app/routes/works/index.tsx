@@ -1,9 +1,7 @@
-import React from 'react'
+import WorksContainer from '@src/containers/Works'
 
 const WorksPage = () => {
-  return (
-    <div>WorksPage</div>
-  )
+  return <WorksContainer />
 }
 
 export default WorksPage

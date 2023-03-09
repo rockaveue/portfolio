@@ -6,9 +6,9 @@ import {
   Image,
   useColorModeValue,
 } from '@chakra-ui/react'
+import Section from '@src/components/Section'
 import { BioSection, BioYear } from './Bio'
 import Paragraph from './Paragraph'
-import Section from './Section'
 
 const HomeContainer: React.FC = () => {
   return (
