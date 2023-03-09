@@ -18,6 +18,7 @@ import { NavLink, useLocation } from '@remix-run/react'
 import Logo from '../Logo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const LinkItem = ({ href, path, children }: any) => {
   const active = path === href
@@ -30,10 +31,34 @@ const LinkItem = ({ href, path, children }: any) => {
   }
   return (
     <NavLink to={href}>
-      <Box p={2} {...(active ? activeColorStyle : inactiveColorStyle)}>
+      <Box {...(active ? activeColorStyle : inactiveColorStyle)}>
         {children}
       </Box>
     </NavLink>
+  )
+}
+
+const ThemeToggleButton = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
+  return (
+    <AnimatePresence exitBeforeEnter initial={false}>
+      <motion.div
+        style={{ display: 'inline-block' }}
+        key={useColorModeValue('light', 'dark')}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 20, opacity: 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        <Button onClick={toggleColorMode} variant="outline" px={3}>
+          {colorMode == 'light' ? (
+            <FontAwesomeIcon icon={faMoon} />
+          ) : (
+            <FontAwesomeIcon icon={faSun} />
+          )}
+        </Button>
+      </motion.div>
+    </AnimatePresence>
   )
 }
 
@@ -45,9 +70,8 @@ const NavigationHeader: React.FC<HeaderProps> = (props) => {
   const { path } = props
   const isDesktop = useBreakpointValue({ base: false, lg: true })
   const location = useLocation()
-  const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <Box as="section" pb={{ base: '12', md: '24' }}>
+    <Box as="section">
       <Box
         as="nav"
         bg="bg-surface"
@@ -62,17 +86,17 @@ const NavigationHeader: React.FC<HeaderProps> = (props) => {
               <Logo />
             </Heading>
             <Flex>
-              <Button onClick={toggleColorMode} variant="outline">
-                {colorMode == 'light' ? (
-                  <FontAwesomeIcon icon={faMoon} />
-                ) : (
-                  <FontAwesomeIcon icon={faSun} />
-                )}
-              </Button>
+              <ThemeToggleButton />
               {isDesktop ? (
                 <Flex justify="space-between" flex="1">
-                  <ButtonGroup variant="link" spacing="8">
-                    <LinkItem href="/works" path={path}>
+                  <ButtonGroup
+                    variant="link"
+                    // spacing="8"
+                    alignItems="center"
+                    sx={{ '& button': { px: 2 } }}
+                    ml={2}
+                  >
+                    <LinkItem href="/works" path={path} p={0}>
                       <Button variant="primary">Works</Button>
                     </LinkItem>
                     <LinkItem href="/posts" path={path}>
